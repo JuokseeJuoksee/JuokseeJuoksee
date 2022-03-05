@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, Text, Button, FlatList } from 'react-native';
 import { Storage, sessionStorage } from '../Classes/Storage'
 import axios from 'axios';
+import Training from './Training';
 
 export default function Trainings({navigation}) {
 
@@ -23,35 +24,22 @@ export default function Trainings({navigation}) {
   }
 
   const renderItem = ({item}) => {
-    return <View styles={styles}><Text>{item.name}, {item.distance}</Text></View>
+    return <Training item={item} navigation={navigation}/>
   }
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Trainings</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#778899' }}>
         <FlatList
+          style={{width:'90%'}}
           data={trainings}
           renderItem={renderItem}
           keyExtractor={training => training.id}
         >
         </FlatList>
         <Button
+        color='black'
         title="Go to Home"
         onPress={() => navigation.navigate('Home')}/>
- 
-
-
-
-
-
       </View>
     );
   }
-
-  const styles = StyleSheet.create({
-    item: {
-      flex: 1,
-      backgroundColor:'#A52A2A',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }})

@@ -7,6 +7,7 @@ import { Stack } from '@react-navigation/native'
 import HomeScreen from './Components/HomeScreen'
 import Trainings from './Components/Trainings'
 import StravaLogin from './Components/StravaLogin'
+import Map from './Components/Map'
 
 export default function App() {
   
@@ -18,6 +19,7 @@ export default function App() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Trainings" component={Trainings} />
       <Stack.Screen name="StravaLogin" component={StravaLogin} />
+      <Stack.Screen name="map" component={Map} />
     </Stack.Navigator>
     </NavigationContainer>
   );
