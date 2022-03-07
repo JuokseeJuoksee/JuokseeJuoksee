@@ -7,11 +7,16 @@ import Training from './Training';
 export default function Trainings({navigation}) {
 
   const [trainings, setTrainings] = React.useState([])
-  React.useEffect(() => getTrainings() ,[])
-  React.useEffect(() => console.log(trainings),[trainings])
-  
+  const [users, setUsers] = React.useState([{}])
+
+  React.useEffect(() => {
+    getUsers()
+    getTrainings()} ,[])
+  React.useEffect(() => console.log(`trainings update`),[trainings])
+  React.useEffect(() => console.log('users update'),[users])
+
   const getTrainings = () => {
-    console.log(sessionStorage.getItem('access_token'))
+
     axios.get('https://www.strava.com/api/v3/athlete/activities', {
       headers : {
         'Authorization':`Bearer ${sessionStorage.getItem('access_token')}`
@@ -23,9 +28,28 @@ export default function Trainings({navigation}) {
     .catch(err => console.error(err))
   }
 
-  const renderItem = ({item}) => {
-    return <Training item={item} navigation={navigation}/>
+  const getUsers = () => {
+    axios.get('https://www.strava.com/api/v3/athlete', {
+      headers : {
+        'Authorization':`Bearer ${sessionStorage.getItem('access_token')}`
+      }
+    })
+    .then(res => {
+      setUsers([res.data])
+    })
+    .catch(err => console.error(err))
   }
+
+  const renderItem = ({item}) => {
+      let user
+      users.forEach(element => {
+        if (element.id == item.athlete.id) {
+          user = element
+        }
+      })
+      console.log(user)
+      return <Training item={item} navigation={navigation} user={user}/>
+      }
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#778899' }}>

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Button, FlatList, Image } from 'react-native';
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons'
 import { Storage, sessionStorage } from '../Classes/Storage'
@@ -41,27 +41,35 @@ export default function Training(props) {
         },
         text:{
             marginTop:10,
-            width:'80%'
+            width:'70%'
         },
         info: {
             padding:10,
             backgroundColor:'#778899',
             borderRadius: 8,
+            marginTop:10
         },
-        data:{width:'50%'}
+        data:{width:'50%'},
+        logo:{
+            width:'13%',
+            padding: 10,
+            marginRight:10,
+            borderRadius:50
+        }
     })
 
     return(
         <View style={styles.item}>
             <View style={{flexDirection:'row'}}>
                 <Text style={styles.text}>{props.item.name}</Text>
+                <Image source={{uri: props.user.profile}}  style={styles.logo} ></Image>
                 <FontAwesome.Button
                 color='black'
                 name="angle-down"
                 backgroundColor= '#A9A9A9'
                 onPress={changeOpenBoolean}/>
             </View>
-
+           
             {
             openBoolean && 
             <View style={styles.info}>
@@ -83,13 +91,18 @@ export default function Training(props) {
                     <Text style={styles.data}>Type of cardio: </Text>
                     <Text style={styles.data}>{props.item.type}</Text>
                 </View>
+                <View style={styles.row}>
+                    <Text style={styles.data}>User: </Text>
+                    <Text style={styles.data}>{props.user.firstname}</Text>
+                </View>
                 
                 <FontAwesome.Button
                 color='black'
                 name="map"
                 backgroundColor= '#778899'
-                onPress={navigateAndStorePolyline}/>
-    
+                onPress={navigateAndStorePolyline}
+                />
+
             </View>
             }
         </View> 
