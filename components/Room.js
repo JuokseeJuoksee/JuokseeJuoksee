@@ -130,7 +130,7 @@ export default function Room({ navigation, route }) {
 
             {
             theBoolean ? 
-                <Trainings trainings={trainings} navigation={navigation} users={users}/>
+                <Trainings trainings={trainings} navigation={navigation} users={athletes}/>
                 :
                 <View>
                 <View style={{ flex: 1 }}>
