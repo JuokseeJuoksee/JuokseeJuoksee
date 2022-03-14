@@ -15,7 +15,7 @@ export default function CreateRoom({ navigation }) {
     const [username, setUsername] = useState('')
 
     useEffect(() => {
-        setUsername(user.email.split('@')[0].replace('.', ''))
+        //setUsername(user.email.split('@')[0].replace('.', ''))
     }, [])
 
     const saveRoom = () => {
