@@ -36,7 +36,6 @@ export default function RegisterButton({navigation, email, password, passwordAga
         set(
             ref(db, 'users/' + auth.currentUser.uid), {
                 userId: auth.currentUser.uid,
-                photoUrl: auth.currentUser.photoURL,
             }
         )
         .catch(err => Alert.alert("Jokin meni pieleen"))

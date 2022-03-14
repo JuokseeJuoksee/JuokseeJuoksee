@@ -47,7 +47,6 @@ export default function StravaButton() {
         set(
             ref(db, 'users/' + auth.currentUser.uid), {
                 userId: auth.currentUser.uid,
-                photoUrl: auth.currentUser.photoURL,
                 access_token: tokens.access_token,
                 refresh_token: tokens.refresh_token,
                 athlete_id: tokens.athlete.id
