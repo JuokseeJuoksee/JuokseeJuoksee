@@ -15,6 +15,9 @@ const auth = getAuth(app)
 
 export default function Room({ navigation, route }) {
 
+    //HUONEESEEN VOI LIITTYÄ MONTA KERTAA! EN OLE JAKSANUT VIELÄ KORJATA
+    //TODO: YKSI HENKILÖ VOI KUULUA KILPAILUUN VAIN KERRAN
+
     const { room } = route.params
 
     const [athletes, setAthletes] = React.useState([])
@@ -96,6 +99,9 @@ export default function Room({ navigation, route }) {
         .catch(() => getAccessToken(user))
     }
 
+    //ACCESS TOKENI VANHENTUU JA UUDEN HANKKIMISTA EI VIELÄ TEHTY
+    //TODO: TEE TÄHÄN FUNKTIOON KUTSU JOKA HAKEE REFRESH TOKENILLA UUDET
+    //TOKENIT
     const getAccessToken = () => {
         console.log('getting new tokens')
     }

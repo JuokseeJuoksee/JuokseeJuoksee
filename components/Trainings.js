@@ -4,7 +4,7 @@ import { Storage, sessionStorage } from '../classes/Storage'
 import axios from 'axios';
 import Training from './Training';
 
-export default function Trainings({trainings, navigation, users}) {
+export default function Trainings({trainings, navigation}) {
 
   const renderItem = ({item}) => {
     console.log(item)

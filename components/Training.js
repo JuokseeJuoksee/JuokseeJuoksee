@@ -4,6 +4,8 @@ import { FontAwesome } from '@expo/vector-icons'
 import { Storage, sessionStorage } from '../classes/Storage'
 
 export default function Training(props) {
+    //MUISTA LISÄTÄ KARTTA TÄHÄNKIN VERSIOON! 
+    //TODO: MAP KOMPONENTTI VANHASTA BRANCHISTA
     
     const [openBoolean, setOpenBoolean] = React.useState(false)
  
@@ -79,8 +81,8 @@ export default function Training(props) {
                     <Text style={styles.data}>Type of cardio: </Text>
                     <Text style={styles.data}>{props.item.type}</Text>
                 </View>
+                
             
-    
             </View>
             }
         </View> 
