@@ -2,6 +2,7 @@ import { View, Button } from "react-native";
 import { app } from '../database/firebase'
 import { getAuth } from "firebase/auth";
 import { deleteUser } from '../phone_storage/asyncStorage'
+import StravaButton from './StravaButton'
 
 const auth = getAuth(app)
 
@@ -28,7 +29,7 @@ export default function Profile({navigation}) {
                 onPress={logOut}
                 />
             </View>
-
+            <StravaButton />
         </View>
     )
 }
