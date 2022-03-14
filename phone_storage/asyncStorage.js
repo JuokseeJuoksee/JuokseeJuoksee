@@ -9,7 +9,7 @@ const saveUser = async (user) => {
     }
 }
 
-const getUserData = async () => {
+const getUser = async () => {
     try {
         const user = await AsyncStorage.getItem('user')
         return JSON.parse(user)
@@ -18,4 +18,13 @@ const getUserData = async () => {
     }
 }
 
-module.exports = { saveUser, getUserData }
+const deleteUser = async () => {
+    try {
+        await AsyncStorage.removeItem('user')
+    } catch (err) {
+        Alert.alert("Jokin meni pieleen", "Käyttäjän poistaminen epäonnistui...")
+    }
+
+}
+
+module.exports = { saveUser, getUser, deleteUser }

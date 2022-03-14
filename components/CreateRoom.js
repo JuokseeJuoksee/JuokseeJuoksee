@@ -1,18 +1,29 @@
 import { View, Text, ImageBackground, TextInput, Button, Alert } from 'react-native';
 import { db } from '../database/firebase'
 import Image from '../assets/background.jpg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { push, ref } from 'firebase/database';
+import { app } from '../database/firebase'
+import { getAuth } from 'firebase/auth';
+
+const auth = getAuth(app)
+const user = auth.currentUser;
 
 export default function CreateRoom({ navigation }) {
 
     const [roomName, setRoomName] = useState('')
+    const [username, setUsername] = useState('')
+
+    useEffect(() => {
+        setUsername(user.email.split('@')[0].replace('.', ''))
+    }, [])
 
     const saveRoom = () => {
         if (roomName) {
             push(
                 ref(db, 'rooms'), {
                     roomname: roomName,
+                    host: username,
                     messages: [{send: new Date().getTime(), message: "Ei vielä viestejä, ole ensimmäinen"}],
                     created: new Date().getTime()
                 }

@@ -1,4 +1,4 @@
-import { View, Button, Alert } from 'react-native';
+import { Button, Alert } from 'react-native';
 import { app } from '../database/firebase'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { saveUser } from '../phone_storage/asyncStorage'

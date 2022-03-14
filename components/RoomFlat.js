@@ -24,6 +24,7 @@ export default function RoomFlat({ room, navigation }) {
             
                 <Text style={{ fontSize: 20, fontWeight: 'bold', margin: 10 }}>{room[1].roomname}</Text>
                 <Text style={{ margin: 20 }}>Luotu {room[1].created}</Text>
+                <Text style={{ margin: 20 }}>Tekijä {room[1].host}</Text>
             
         </Pressable>
     )
