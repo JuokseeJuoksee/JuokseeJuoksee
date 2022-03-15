@@ -25,7 +25,8 @@ export default function CreateRoom({ navigation }) {
                     roomname: roomName,
                     host: username,
                     messages: [{send: new Date().getTime(), message: "Ei vielä viestejä, ole ensimmäinen"}],
-                    created: new Date().getTime()
+                    created: new Date().getTime(),
+                    users: [auth.currentUser.uid]
                 }
             )
             setRoomName('')
