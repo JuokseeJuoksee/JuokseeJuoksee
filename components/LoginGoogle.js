@@ -2,6 +2,7 @@ import { ImageBackground, Pressable, Alert } from "react-native";
  import GoogleImg from '../assets/google.png'
 import { initializeApp } from 'firebase/app';
 import * as Google from 'expo-google-app-auth';
+import { saveUser } from '../phone_storage/asyncStorage'
 
 
 
@@ -28,12 +29,10 @@ export default function LoginGoogle({navigation}) {
           );
     
           // Sign in with credential from the Google user.
-          signInWithCredential(auth, credential)
-          .then(
-            //save tokens
-            //learn to use tokens to authenticate in future
-  
-          ).catch((error) => {
+          const user = signInWithCredential(auth, credential)
+          saveUser(user)
+          empty()
+          .catch((error) => {
             // Handle Errors here.
             console.log(error.message);
           });
