@@ -39,7 +39,7 @@ export default function Room({ navigation, route }) {
         
         let users = []
 
-        room[1].users && room[1].users.forEach(element => {
+        room[1].users.forEach(element => {
             const userRef = ref(db, 'users/' + element)
             onValue(userRef, (snapshot) => {
                 const data = snapshot.val()
@@ -54,7 +54,7 @@ export default function Room({ navigation, route }) {
 
     const getAllAthletes = (users) => {
         console.log('getting athletes')
-        users.forEach(user => getAthletes(user))
+        users.forEach(user => getAthlete(user))
        
     }
 
@@ -78,10 +78,12 @@ export default function Room({ navigation, route }) {
             
             })
         })
-        .catch(() => getAccessToken(user))
+        .catch(err => { 
+            console.error(err)
+            getAccessToken(user)})
     }
 
-    const getAthletes = (user) => {
+    const getAthlete = (user) => {
         axios.get('https://www.strava.com/api/v3/athlete', {
           headers : {
             'Authorization':`Bearer ${user.access_token}`
@@ -102,8 +104,28 @@ export default function Room({ navigation, route }) {
     //ACCESS TOKENI VANHENTUU JA UUDEN HANKKIMISTA EI VIELÄ TEHTY
     //TODO: TEE TÄHÄN FUNKTIOON KUTSU JOKA HAKEE REFRESH TOKENILLA UUDET
     //TOKENIT
-    const getAccessToken = () => {
+    const getAccessToken = (user) => {
         console.log('getting new tokens')
+
+        axios.post(`https://www.strava.com/api/v3/oauth/token?client_id=76862&client_secret=67401766aa8757e4f2c742595091a8d3014137c6&grant_type=refresh_token&refresh_token=${user.refresh_token}`)
+        .then(res => {
+            putTokensToUser(res.data, user)})
+        .catch(err => console.error(err))
+    }
+
+    const putTokensToUser = (tokens, user) => {
+        console.log('tokens to user')
+        console.log(tokens)
+        set(
+            ref(db, 'users/' + auth.currentUser.uid), {
+                userId: auth.currentUser.uid,
+                access_token: tokens.access_token,
+                refresh_token: tokens.refresh_token,
+                athlete_id: user.athlete_id
+            }
+        )
+        .catch(err => Alert.alert("Jokin meni pieleen"))
+
     }
 
     React.useState(() => getGoogleUsers(),[])
