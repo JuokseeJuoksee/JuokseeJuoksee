@@ -20,12 +20,10 @@ export default function Room({ navigation, route }) {
 
     const { room } = route.params
 
-    const [athletes, setAthletes] = React.useState([])
     const [trainings, setTrainings] = React.useState([])
     const [theBoolean, setTheBoolean] = React.useState(false)
 
     React.useEffect(() => console.log(`trainings: ${trainings.length}`),[trainings])
-    React.useEffect(() => console.log(`athletes: ${athletes.length}`),[athletes])
 
     const userToRoom = () => {
         update(
@@ -48,15 +46,9 @@ export default function Room({ navigation, route }) {
         })
 
         console.log(users)
-        getAllAthletes(users)
         getAllTrainings(users)
     }
 
-    const getAllAthletes = (users) => {
-        console.log('getting athletes')
-        users.forEach(user => getAthlete(user))
-       
-    }
 
     const getAllTrainings = (users) => {
         console.log('getting all trainings')
@@ -72,8 +64,8 @@ export default function Room({ navigation, route }) {
           }
         })
         .then(res => {
+            console.log(res)
             res.data.forEach(element => {
-
                 setTrainings(arr => [...arr, element])
             
             })
@@ -83,23 +75,6 @@ export default function Room({ navigation, route }) {
             getAccessToken(user)})
     }
 
-    const getAthlete = (user) => {
-        axios.get('https://www.strava.com/api/v3/athlete', {
-          headers : {
-            'Authorization':`Bearer ${user.access_token}`
-          }
-        })
-        .then(res => {
-            
-            res.data.forEach(element => {
-
-                setAthletes(arr => [...arr, element])
-            
-            })
-          
-        })
-        .catch(() => getAccessToken(user))
-    }
 
     //ACCESS TOKENI VANHENTUU JA UUDEN HANKKIMISTA EI VIELÄ TEHTY
     //TODO: TEE TÄHÄN FUNKTIOON KUTSU JOKA HAKEE REFRESH TOKENILLA UUDET
@@ -158,7 +133,7 @@ export default function Room({ navigation, route }) {
 
             {
             theBoolean ? 
-                <Trainings trainings={trainings} navigation={navigation} users={athletes}/>
+                <Trainings trainings={trainings} navigation={navigation}/>
                 :
                 <View>
                 <View style={{ flex: 1 }}>
